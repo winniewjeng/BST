@@ -19,10 +19,21 @@ int main()
 //    cout << bst.nodeCount(&n) << endl;
 //    cout << bst.totalDataCount(&n) << endl;
     cout <<"hello world"<< endl;
-    
+//    cout << max(0,0) << endl;
     bst<int> b;
-    b.insert(34, 91);
-    b.insert(34, 10);
+//    b.insert(30, 15);
+   
+    b.insert(50, 25);
+    b.insert(70, 25);
+    b.insert(30, 10);
+    b.insert(90, 25);
+    b.insert(10, 25);
+    b.insert(80, 25);
+    b.insert(100, 25);
+    b.insert(60, 45);
+    
+    
+    
 
 //  binaryTree<char> tree[MAXTREE];
 //  int touse=0;

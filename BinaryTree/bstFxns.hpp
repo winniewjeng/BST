@@ -23,33 +23,32 @@ class bstfxns {
 public:
     
     bstfxns(){}
-//    ~bstfxns(){}
+    ~bstfxns(){}
     
     int nodeCount(node<T>* root);
     int totalDataCount(node<T>* root);
     
+    int height(node<T>* root);
+    int balanceFactor(node<T>* root);
+//    void balance();
     
-    void insert(node<T>* root, const T& data, int count = 1);
-    void remove(node<T>* root, const T& data, unsigned int c = 1);
-    
-   
-//    bool operator<(const node<T>* n) { return x < n._data; }
-    
+    void insert(node<T>*& root, const T& data, int count = 1);
+    void remove(node<T>*& root, const T& data, int count = 1);
+
     
 };
 
 // count the number of real nodes in the tree
 template <typename T>
 int bstfxns<T>::nodeCount(node<T>* root) {
-    node<T>* walker = root;
-    if (!walker)
+    if (!root)
         return 0;
     
     int count = 1;
-    if (walker->_left)
-        count = count + totalDataCount(walker->_left);
-    if (walker->_right)
-        count = count + totalDataCount(walker->_right);
+    if (root->_left)
+        count = count + totalDataCount(root->_left);
+    if (root->_right)
+        count = count + totalDataCount(root->_right);
     return count;
 }
 
@@ -57,37 +56,57 @@ int bstfxns<T>::nodeCount(node<T>* root) {
 // count the number of total data inside the tree
 template <typename T>
 int bstfxns<T>::totalDataCount(node<T>* root) {
-    node<T>* walker = root;
-    if (!walker)
+
+    if (!root)
         return 0;
     
-    int count = walker->getCount();
-    if (walker->_left)
-        count = count + totalDataCount(walker->_left);
-    if (walker->_right)
-        count = count + totalDataCount(walker->_right);
+    int count = root->getCount();
+    if (root->_left)
+        count = count + totalDataCount(root->_left);
+    if (root->_right)
+        count = count + totalDataCount(root->_right);
     return count;
 }
 
 // add a data
 template<typename T>
-void bstfxns<T>::insert(node<T>* root, const T& data, int count) {
+void bstfxns<T>::insert(node<T>*& root, const T& data, int count) {
     
     if (!root) {
         root = new node<T>(data, count);
-    } else if (root->getData() == data) {
+    } else if (*root == data) {
         root += count;
     } else if (*root > data) {
         insert(root->_left, data, count);
     } else if (*root < data) {
         insert(root->_right, data, count);
     }
-//    std::cout << nodeCount(root) << std::endl;
+    
 //    std::cout << totalDataCount(root) << std::endl;
+
 }
 
 template<typename T>
-void bstfxns<T>::remove(node<T>* root, const T& data, unsigned int c) {
+int bstfxns<T>::height(node<T>* root) {
+    if (!root)
+        return 0;
+    
+    return 1 + std::max(height(root->_left), height(root->_right));
+}
+
+template<typename T>
+int bstfxns<T>::balanceFactor(node<T>* root) {
+    
+    return 0;
+}
+
+//template<typename T>
+//void balance() {
+//
+//}
+
+template<typename T>
+void bstfxns<T>::remove(node<T>*& root, const T& data, int count) {
     
 }
 
