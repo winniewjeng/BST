@@ -32,6 +32,10 @@ public:
     void insert(node<T>* root, const T& data, int count = 1);
     void remove(node<T>* root, const T& data, unsigned int c = 1);
     
+   
+//    bool operator<(const node<T>* n) { return x < n._data; }
+    
+    
 };
 
 // count the number of real nodes in the tree
@@ -44,10 +48,8 @@ int bstfxns<T>::nodeCount(node<T>* root) {
     int count = 1;
     if (walker->_left)
         count = count + totalDataCount(walker->_left);
-    
     if (walker->_right)
         count = count + totalDataCount(walker->_right);
-    
     return count;
 }
 
@@ -62,10 +64,8 @@ int bstfxns<T>::totalDataCount(node<T>* root) {
     int count = walker->getCount();
     if (walker->_left)
         count = count + totalDataCount(walker->_left);
-    
     if (walker->_right)
         count = count + totalDataCount(walker->_right);
-    
     return count;
 }
 
@@ -73,22 +73,24 @@ int bstfxns<T>::totalDataCount(node<T>* root) {
 template<typename T>
 void bstfxns<T>::insert(node<T>* root, const T& data, int count) {
     
-    node<T>* walker = root;
-    
     if (!root) {
         root = new node<T>(data, count);
-    } else if (walker->getData() == data) {
-        std::cout << "hi\n";
+    } else if (root->getData() == data) {
         root += count;
+    } else if (*root > data) {
+        insert(root->_left, data, count);
+    } else if (*root < data) {
+        insert(root->_right, data, count);
     }
-    std::cout << nodeCount(root) << std::endl;
-    std::cout << totalDataCount(root) << std::endl;
+//    std::cout << nodeCount(root) << std::endl;
+//    std::cout << totalDataCount(root) << std::endl;
 }
 
 template<typename T>
 void bstfxns<T>::remove(node<T>* root, const T& data, unsigned int c) {
     
 }
+
 
 
 

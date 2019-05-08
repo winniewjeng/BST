@@ -24,7 +24,7 @@ public:
     }
     
     void remove(const T& data, int count = 1) {
-        ::remove(root, data, count);
+        bstfxns<T>::remove(root, data, count);
     }
     
     bool search(const T& data) {
