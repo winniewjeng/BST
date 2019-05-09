@@ -23,16 +23,14 @@ int main()
     bst<int> b;
 //    b.insert(30, 15);
    
+//    b.insert(70, 25);
     b.insert(50, 25);
-    b.insert(70, 25);
-    b.insert(30, 10);
-    b.insert(90, 25);
     b.insert(10, 25);
-    b.insert(80, 25);
-    b.insert(100, 25);
-    b.insert(60, 45);
+    b.insert(70, 25);
+//    b.insert(20, 25);
+//    b.insert(80, 25);
     
-    
+//    b.print();
     
 
 //  binaryTree<char> tree[MAXTREE];

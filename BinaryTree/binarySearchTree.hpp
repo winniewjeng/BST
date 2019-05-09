@@ -21,16 +21,29 @@ public:
     
     void insert(const T& data, int count = 1) {
         bstfxns<T>::insert(root, data, count);
-//        std::cout << totalDataCount(root) << std::endl;
-        std::cout << bstfxns<T>::height(root) << std::endl;
+        std::cout << bstfxns<T>::totalDataCount(root) << std::endl;
+        bstfxns<T>::balance(root);
+//        std::cout << bstfxns<T>::height(root) << std::endl;
     }
     
     void remove(const T& data, int count = 1) {
         bstfxns<T>::remove(root, data, count);
     }
     
-    int totalDataCount(node<T>* root);
+    void print() {
+        bstfxns<T>::print(root);
+    }
     
+    
+//    void balance() {
+//        
+//        std::cout << balanceFactor(root) << std::endl;
+//    }
+//    
+//    int balanceFactor(node<T>* root) {
+//        
+//    }
+    //    int totalDataCount(node<T>* root);
 };
 
 //// count the number of total data inside the tree

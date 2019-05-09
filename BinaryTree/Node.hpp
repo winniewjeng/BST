@@ -31,8 +31,8 @@ struct node {
     // setters
     void set(const T& data, int count);
     void update_depth();
-    node<T>& operator-=(int count) { this->_count -= count; return *this; }
-    node<T>& operator+=(int count) { this->_count += count; return *this; }
+//    node<T>& operator-=(int count) { this->_count -= count; return *this; } // broke
+//    node<T>& operator+=(int count) { this->_count += count; return *this; }  // broke
     
     // ios
     template<typename S>
@@ -50,7 +50,6 @@ struct node {
     
     T& operator*() { return ptr->data; }
     T* operator->() { return &ptr->data; }
-    
     
 private:
     void copy(const node<T>& other);
