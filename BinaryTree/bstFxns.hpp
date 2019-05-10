@@ -113,50 +113,37 @@ void bstfxns<T>::balance(node<T>* root) {
         balance(root->_left);
     if (root->_right)
         balance(root->_right);
-    
-    // left-heavy
     if ( balanceFactor(root) > 1) {
-        std::cout <<  "balanceFactor " << balanceFactor(root) << std::endl;
         if( balanceFactor(root->_left) < 0) {
-            std::cout <<  "left heavy zig\n";
-            // zigzag
-//            std::cout << root->_left->_data << std::endl; // 20
-//            std::cout << root->_left->_right->_data << std::endl; // 40
+            std::cout << "left heavy & zigged" << std::endl;
             node<T>* temp = root->_left;
             root->_left = root->_left->_right;
-//            std::cout << root->_left->_data << std::endl; // 40
-//            std::cout << temp->_data << std::endl; // 20
             temp->_right = nullptr;
-//            std::cout << root->_left->_data << std::endl; // 40
             root->_left->_left = temp;
         }
         if( balanceFactor(root->_left) > 0 ) {
-            std::cout <<  "left heavy\n";
-            std::cout << "root " << root->_data << std::endl;
-            if (root->_right)
-                std::cout <<  "what the hell?\n"; // ok normal
-            std::cout << "left " << root->_left->_data << std::endl; // 40
+            std::cout << "left heavy" << std::endl;
             node<T>* temp = root->_left;
-            std::cout << "temp " << temp->_data << std::endl; // 40
             root->_left = temp->_left;
-            std::cout << "left " << root->_left->_data << std::endl; // 20
             root->_right = temp;
-            std::cout << "right " << root->_right->_data << std::endl; // 40
-            if (root->_right->_left)
-                std::cout <<  "what the hell?\n"; // not normal
-            if (root->_right->_right)
-                std::cout <<  "what the hell????\n"; // not normal
-            
-            
+            root->_right->_left = nullptr;
         }
     }
-    else if ( balanceFactor(root) < -1) {
-        //                    std::cout <<  "balanceFactor " << balanceFactor(root) << std::endl;
+    else if (balanceFactor(root) < -1) {
         if(balanceFactor(root->_left) > 0) {
-            std::cout <<  "right heavy zig\n";
-        } else {
-            std::cout <<  "right heavy\n";
+            std::cout << "right heavy & zigged" << std::endl;
+            node<T>* temp = root->_right;
+            root->_right = root->_right->_left;
+            temp->_left = nullptr;
+            root->_right->_right = temp;
             
+        }
+        if( balanceFactor(root->_left) < 0 ) {
+            std::cout << "right heavy" << std::endl;
+            node<T>* temp = root->_right;
+            root->_right = temp->_right;
+            root->_left = temp;
+            root->_left->_right = nullptr;
         }
     }
 }

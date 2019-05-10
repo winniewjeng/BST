@@ -24,13 +24,9 @@ int main()
     //    b.insert(30, 15);
     
     //    b.insert(70, 25);
-    b.insert(50, 1);
-//    b.insert(40, 1);
-    b.insert(20, 1);
-    b.insert(40, 1);
-//    b.insert(10, 1);
-    //    b.insert(70, 1);
     
+    for (int i = 10; i < 100; i*=10)
+        b.insert(i, 1);
     //    b.insert(80, 25);
     
     //    b.print();
