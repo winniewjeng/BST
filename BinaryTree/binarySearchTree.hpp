@@ -21,7 +21,8 @@ public:
     
     void insert(const T& data, int count = 1) {
         bstfxns<T>::insert(root, data, count);
-        std::cout << bstfxns<T>::totalDataCount(root) << std::endl;
+        
+//        std::cout << bstfxns<T>::totalDataCount(root) << std::endl;
         bstfxns<T>::balance(root);
 //        std::cout << bstfxns<T>::height(root) << std::endl;
     }

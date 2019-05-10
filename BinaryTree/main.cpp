@@ -15,28 +15,31 @@ using namespace std;
 int main()
 {
     node<int> n(4, 3);
-//    bstPrivateFxns<int> bst;
-//    cout << bst.nodeCount(&n) << endl;
-//    cout << bst.totalDataCount(&n) << endl;
+    //    bstPrivateFxns<int> bst;
+    //    cout << bst.nodeCount(&n) << endl;
+    //    cout << bst.totalDataCount(&n) << endl;
     cout <<"hello world"<< endl;
-//    cout << max(0,0) << endl;
+    //    cout << max(0,0) << endl;
     bst<int> b;
-//    b.insert(30, 15);
-   
-//    b.insert(70, 25);
-    b.insert(50, 25);
-    b.insert(10, 25);
-    b.insert(70, 25);
-//    b.insert(20, 25);
-//    b.insert(80, 25);
+    //    b.insert(30, 15);
     
-//    b.print();
+    //    b.insert(70, 25);
+    b.insert(50, 1);
+//    b.insert(40, 1);
+    b.insert(20, 1);
+    b.insert(40, 1);
+//    b.insert(10, 1);
+    //    b.insert(70, 1);
     
-
-//  binaryTree<char> tree[MAXTREE];
-//  int touse=0;
-//  menu(tree, touse);
-  return 0;
+    //    b.insert(80, 25);
+    
+    //    b.print();
+    
+    
+    //  binaryTree<char> tree[MAXTREE];
+    //  int touse=0;
+    //  menu(tree, touse);
+    return 0;
 }
 //
 //void perform(binaryTree<char> tree[], char selection, int &touse)

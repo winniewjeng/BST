@@ -36,7 +36,7 @@ public:
     void remove(node<T>*& root, const T& data, int count = 1);
     
     void print(node<T>* root);
-
+    
     
 };
 
@@ -58,7 +58,7 @@ int bstfxns<T>::nodeCount(node<T>* root) {
 // count the number of total data inside the tree
 template <typename T>
 int bstfxns<T>::totalDataCount(node<T>* root) {
-
+    
     if (!root)
         return 0;
     
@@ -76,25 +76,25 @@ void bstfxns<T>::insert(node<T>*& root, const T& data, int count) {
     
     if (!root) {
         root = new node<T>(data, count);
-//        balance(root); //??????????????
+        //        balance(root); //??????????????
     } else if (*root == data) {
         root->_count += count;
-//        root->_count = root->_count + count;
+        //        root->_count = root->_count + count;
     } else if (*root > data) {
         insert(root->_left, data, count);
-//        balance(root->left);
+        //        balance(root->_left);
     } else if (*root < data) {
         insert(root->_right, data, count);
-//        balance(root->left);
+        //        balance(root->_right);
     }
-//    std::cout << totalDataCount(root) << std::endl;
+    //    std::cout << totalDataCount(root) << std::endl;
 }
 
 template<typename T>
 int bstfxns<T>::height(node<T>* root) {
     if (!root)
         return 0;
-    return 1 + std::max(height(root->_left), height(root->_right));
+    return ( 1 + std::max( height(root->_left), height(root->_right) ) );
 }
 
 template<typename T>
@@ -102,37 +102,78 @@ int bstfxns<T>::balanceFactor(node<T>* root) {
     
     if(!root)
         return 0;
-    return height(root->_left) - height(root->_right);
+    return ( height(root->_left) - height(root->_right) );
 }
 
 template<typename T>
 void bstfxns<T>::balance(node<T>* root) {
     
-    if( abs(balanceFactor(root)) <= 1 ) {
-        std::cout << "Tree is balanced!\n";
-    }
+    // left heavy
+    if (root->_left)
+        balance(root->_left);
+    if (root->_right)
+        balance(root->_right);
     
-    else if ( balanceFactor(root) > 1) {
-        if( balanceFactor(root->_left) -  balanceFactor(root->_right) < 0) {
+    // left-heavy
+    if ( balanceFactor(root) > 1) {
+        std::cout << root->_data << std::endl;
+        std::cout <<  "balanceFactor " << balanceFactor(root) << std::endl;
+        if( balanceFactor(root->_left) < 0) {
+            std::cout <<  "left heavy zig\n";
+            // zigzag
+            std::cout << root->_left->_data << std::endl; // 20
+            std::cout << root->_left->_right->_data << std::endl; // 40
+            
             node<T>* temp = root->_left;
-            root->_left = (root->_left)->_right;
-            (root->_left)->_left = temp;
+            root->_left = root->_left->_right;
+            std::cout << root->_left->_data << std::endl; // 40
+            std::cout << temp->_data << std::endl; // 20
+            temp->_right = nullptr;
+            std::cout << root->_left->_data << std::endl; // 40
+            root->_left->_left = temp; // set
+            std::cout << root->_left->_left->_data << std::endl; // nullptr
+//            std::cout << temp->_right->_data << std::endl; // nullptr
+//            if ( !(root->_left)->_right->_left && !(root->_left)->_right->_right) {
+//                std::cout <<  "I'm ziggged\n";
+//            }
+            
+//            ((root->_left)->_right)->_left = root->_left;  // set left of 40 is 20
+            
+//            if ( !(root->_left)->_right->_left && !(root->_left)->_right->_right) {
+//                std::cout <<  "I'm ziggged\n";
+//            }
+//            std::cout << ((root->_left)->_right)->_left->_data  << std::endl; // 20
+//            std::cout << ((root->_left))->_data  << std::endl; // 20
+//            root->_left = (root->_left)->_right; // set left of 50 to 40
+//            std::cout << ((root->_left))->_data  << std::endl; // left of 50 is now 40
+//            std::cout << ((root->_left))->_left->_data  << std::endl;
+//            (root->_left)->_left = nullptr;
+//            if (!((root->_left))->_left)
+//                std::cout << "null!" << std::endl; // original left of 50 is 20
+//            if (!((root->_right)))
+//                std::cout << "null!" << std::endl; // original left of 50 is 20
+//            if (!((root->_left)->_right))
+//                std::cout << "null!" << std::endl; // original left of 50 is 20
         }
-        node<T>* temp = root;
-        root =  root->_left;
-        root->_right = temp;
-    }  else {
-        if (balanceFactor(root->_left) -  balanceFactor(root->_right) > 0) {
-            node<T>* temp = root->_right;
-            root->_right = (root->_right)->_right;
-            (root->_right)->_right = temp;
+////        std::cout << root->_data << std::endl;
+//        std::cout << root->_left->_data << std::endl;
+//        std::cout << root->_left->_left->_data << std::endl;
+        if( balanceFactor(root->_left) > 0 ) {
+            std::cout <<  "left heavy \n";
+            root->_left->_left->_right = root->_left;
+            root->_left = (root->_left)->_left;
+            (root->_left)->_left = nullptr;
         }
-        node<T>* temp = root;
-        root = root->_right;
-        root->_left = temp;
     }
-    
-
+    else if ( balanceFactor(root) < -1) {
+        //                    std::cout <<  "balanceFactor " << balanceFactor(root) << std::endl;
+        if(balanceFactor(root->_left) > 0) {
+            std::cout <<  "right heavy zig\n";
+        } else {
+            std::cout <<  "right heavy\n";
+            
+        }
+    }
 }
 
 template<typename T>
