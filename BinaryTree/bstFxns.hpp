@@ -116,53 +116,38 @@ void bstfxns<T>::balance(node<T>* root) {
     
     // left-heavy
     if ( balanceFactor(root) > 1) {
-        std::cout << root->_data << std::endl;
         std::cout <<  "balanceFactor " << balanceFactor(root) << std::endl;
         if( balanceFactor(root->_left) < 0) {
             std::cout <<  "left heavy zig\n";
             // zigzag
-            std::cout << root->_left->_data << std::endl; // 20
-            std::cout << root->_left->_right->_data << std::endl; // 40
-            
+//            std::cout << root->_left->_data << std::endl; // 20
+//            std::cout << root->_left->_right->_data << std::endl; // 40
             node<T>* temp = root->_left;
             root->_left = root->_left->_right;
-            std::cout << root->_left->_data << std::endl; // 40
-            std::cout << temp->_data << std::endl; // 20
+//            std::cout << root->_left->_data << std::endl; // 40
+//            std::cout << temp->_data << std::endl; // 20
             temp->_right = nullptr;
-            std::cout << root->_left->_data << std::endl; // 40
-            root->_left->_left = temp; // set
-            std::cout << root->_left->_left->_data << std::endl; // nullptr
-//            std::cout << temp->_right->_data << std::endl; // nullptr
-//            if ( !(root->_left)->_right->_left && !(root->_left)->_right->_right) {
-//                std::cout <<  "I'm ziggged\n";
-//            }
-            
-//            ((root->_left)->_right)->_left = root->_left;  // set left of 40 is 20
-            
-//            if ( !(root->_left)->_right->_left && !(root->_left)->_right->_right) {
-//                std::cout <<  "I'm ziggged\n";
-//            }
-//            std::cout << ((root->_left)->_right)->_left->_data  << std::endl; // 20
-//            std::cout << ((root->_left))->_data  << std::endl; // 20
-//            root->_left = (root->_left)->_right; // set left of 50 to 40
-//            std::cout << ((root->_left))->_data  << std::endl; // left of 50 is now 40
-//            std::cout << ((root->_left))->_left->_data  << std::endl;
-//            (root->_left)->_left = nullptr;
-//            if (!((root->_left))->_left)
-//                std::cout << "null!" << std::endl; // original left of 50 is 20
-//            if (!((root->_right)))
-//                std::cout << "null!" << std::endl; // original left of 50 is 20
-//            if (!((root->_left)->_right))
-//                std::cout << "null!" << std::endl; // original left of 50 is 20
+//            std::cout << root->_left->_data << std::endl; // 40
+            root->_left->_left = temp;
         }
-////        std::cout << root->_data << std::endl;
-//        std::cout << root->_left->_data << std::endl;
-//        std::cout << root->_left->_left->_data << std::endl;
         if( balanceFactor(root->_left) > 0 ) {
-            std::cout <<  "left heavy \n";
-            root->_left->_left->_right = root->_left;
-            root->_left = (root->_left)->_left;
-            (root->_left)->_left = nullptr;
+            std::cout <<  "left heavy\n";
+            std::cout << "root " << root->_data << std::endl;
+            if (root->_right)
+                std::cout <<  "what the hell?\n"; // ok normal
+            std::cout << "left " << root->_left->_data << std::endl; // 40
+            node<T>* temp = root->_left;
+            std::cout << "temp " << temp->_data << std::endl; // 40
+            root->_left = temp->_left;
+            std::cout << "left " << root->_left->_data << std::endl; // 20
+            root->_right = temp;
+            std::cout << "right " << root->_right->_data << std::endl; // 40
+            if (root->_right->_left)
+                std::cout <<  "what the hell?\n"; // not normal
+            if (root->_right->_right)
+                std::cout <<  "what the hell????\n"; // not normal
+            
+            
         }
     }
     else if ( balanceFactor(root) < -1) {
