@@ -30,7 +30,7 @@ public:
     
     int height(node<T>* root);
     int balanceFactor(node<T>* root);
-    void balance(node<T>* root);
+    void balance(node<T>*& root);
     
     void insert(node<T>*& root, const T& data, int count = 1);
     void remove(node<T>*& root, const T& data, int count = 1);
@@ -76,18 +76,13 @@ void bstfxns<T>::insert(node<T>*& root, const T& data, int count) {
     
     if (!root) {
         root = new node<T>(data, count);
-        //        balance(root); //??????????????
     } else if (*root == data) {
         root->_count += count;
-        //        root->_count = root->_count + count;
     } else if (*root > data) {
         insert(root->_left, data, count);
-        //        balance(root->_left);
     } else if (*root < data) {
         insert(root->_right, data, count);
-        //        balance(root->_right);
     }
-    //    std::cout << totalDataCount(root) << std::endl;
 }
 
 template<typename T>
@@ -106,45 +101,43 @@ int bstfxns<T>::balanceFactor(node<T>* root) {
 }
 
 template<typename T>
-void bstfxns<T>::balance(node<T>* root) {
+void bstfxns<T>::balance(node<T>*& root) {
     
     // left heavy
     if (root->_left)
         balance(root->_left);
     if (root->_right)
         balance(root->_right);
-    if ( balanceFactor(root) > 1) {
-        if( balanceFactor(root->_left) < 0) {
-            std::cout << "left heavy & zigged" << std::endl;
-            node<T>* temp = root->_left;
-            root->_left = root->_left->_right;
-            temp->_right = nullptr;
-            root->_left->_left = temp;
-        }
-        if( balanceFactor(root->_left) > 0 ) {
-            std::cout << "left heavy" << std::endl;
-            node<T>* temp = root->_left;
-            root->_left = temp->_left;
-            root->_right = temp;
-            root->_right->_left = nullptr;
-        }
+    
+    if ( balanceFactor(root) > 1 && balanceFactor(root->_left) < 0) {
+        std::cout << "left heavy & zigged" << std::endl;
+        node<T>* temp = root->_left;
+        root->_left = temp->_right;
+        temp->_right = nullptr;
+        root->_left->_left = temp;
     }
-    else if (balanceFactor(root) < -1) {
-        if(balanceFactor(root->_left) > 0) {
-            std::cout << "right heavy & zigged" << std::endl;
-            node<T>* temp = root->_right;
-            root->_right = root->_right->_left;
-            temp->_left = nullptr;
-            root->_right->_right = temp;
-            
-        }
-        if( balanceFactor(root->_left) < 0 ) {
-            std::cout << "right heavy" << std::endl;
-            node<T>* temp = root->_right;
-            root->_right = temp->_right;
-            root->_left = temp;
-            root->_left->_right = nullptr;
-        }
+    if ( balanceFactor(root) > 1 && balanceFactor(root->_left) > 0 ) {
+        std::cout << "left heavy" << std::endl;
+        node<T>* temp = root;
+        root = root->_left;
+        temp->_left = nullptr;
+        root->_right = temp;
+    }
+    if (balanceFactor(root) < -1 && balanceFactor(root->_left) > 0) {
+        std::cout << "right heavy & zigged" << std::endl;
+        node<T>* temp = root->_right;
+        root->_right = temp->_left;
+        temp->_left = nullptr;
+        root->_right->_right = temp;
+        
+    }
+    if (balanceFactor(root) < -1 && balanceFactor(root->_left) < 0 ) {
+        std::cout << "right heavy" << std::endl;
+        node<T>* temp = root;
+        root = root->_right;
+        temp->_right = nullptr;
+        root->_left = temp;
+        
     }
 }
 
@@ -155,13 +148,14 @@ void bstfxns<T>::remove(node<T>*& root, const T& data, int count) {
 
 template<typename T>
 void bstfxns<T>::print(node<T>* root) {
-    // post order traversal for printing
+    // in-order traversal for printing
     if (root) {
         if (root->_left)
             print(root->_left);
+        std::cout << " | " << root->_data << " | " << std::endl;
         if (root->_right)
             print(root->_right);
-        std::cout << " | " << root->_data << " | " << std::endl;
+        
     }
 }
 

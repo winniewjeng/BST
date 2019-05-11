@@ -2,39 +2,23 @@
 #include <iostream>
 #include <fstream>
 #include "binarySearchTree.hpp"
-//#include "BST"
-
-
 
 using namespace std;
-//
-//void menu(binaryTree<char> tree[],int &toUse);
-//void perform(binaryTree<char> &myTree, char selection, int &touse);
-//
 
 int main()
 {
-    node<int> n(4, 3);
-    //    bstPrivateFxns<int> bst;
-    //    cout << bst.nodeCount(&n) << endl;
-    //    cout << bst.totalDataCount(&n) << endl;
-    cout <<"hello world"<< endl;
-    //    cout << max(0,0) << endl;
     bst<int> b;
-    //    b.insert(30, 15);
+    b.insert(6, 1);
+    b.insert(7, 1);
+    b.insert(4, 1);
+    b.insert(5, 1);
+    b.insert(2, 1);
+    b.insert(4, 1);
+    b.insert(1, 1);
+    b.insert(7, 1);
+    b.insert(9, 1);
     
-    //    b.insert(70, 25);
-    
-    for (int i = 10; i < 100; i*=10)
-        b.insert(i, 1);
-    //    b.insert(80, 25);
-    
-    //    b.print();
-    
-    
-    //  binaryTree<char> tree[MAXTREE];
-    //  int touse=0;
-    //  menu(tree, touse);
+    b.print();
     return 0;
 }
 //
