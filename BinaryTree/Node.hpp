@@ -47,7 +47,7 @@ struct node {
     bool operator>=(const T& x) { return _data >= x; }
     bool operator==(const T& x) { return _data == x; }
     
-    bool operator==(const node<T>*& n) { return _data == n->_data; }
+//    bool operator==(const node<T>*& n) { return _data == n->_data; }
     
     
     T& operator*() { return ptr->data; }

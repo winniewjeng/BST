@@ -27,8 +27,9 @@ public:
     }
     
     void remove(const T& data, int count = 1) {
-        bstfxns<T>::remove(root, data, count);
-        std::cout << "root " << root->_data << std::endl;
+        node<T>* target = search(data);
+        bstfxns<T>::remove(root, target, count);
+//        std::cout << "root " << root->_data << std::endl;
     }
     
     node<T>* search(const T& data) {

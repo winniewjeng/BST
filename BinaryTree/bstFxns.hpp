@@ -33,7 +33,7 @@ public:
     void balance(node<T>*& root);
     
     void insert(node<T>*& root, const T& data, int count = 1);
-    void remove(node<T>*& root, const T& data, int count = 1);
+    void remove(node<T>*& root, node<T>*& target, int count = 1);
     node<T>* search(node<T>*& root, const T& data);
     
     void print(node<T>* root);
@@ -137,8 +137,61 @@ void bstfxns<T>::balance(node<T>*& root) {
 }
 
 template<typename T>
-void bstfxns<T>::remove(node<T>*& root, const T& data, int count) {
+void bstfxns<T>::remove(node<T>*& root, node<T>*& target, int count) {
     
+    if (!target)
+        std::cout << "cannot remove nonexistent data" << std::endl;
+    
+    else if (target->_count - count < 1) {
+        // delete target
+        node<T>* successor;
+        node<T>* walker;
+        // does target have a right child?
+        if(target->_right) {
+            walker = target->_right;
+            // does target's r.child have l.(grand)child?
+            if(walker->_left) {
+                while (walker->_left->_left)
+                    walker = walker->_left;
+                
+                successor = walker->_left;
+                
+                // does successor have a r.child?
+                if (successor->_right) {
+                    node<T>* temp = successor->_right;
+                    delete successor->_right;
+                    walker->_left = temp;
+                }
+            } else {
+                //target's r.child does not have any l.child
+                successor = target->_right;
+            }
+            // common algo for different cases when target have r.child: or simply target = successor
+            target->_data = successor->_data;
+            target->_count = successor->_count;
+            // unlikely but exception handling is important
+            if (successor)
+                delete successor;
+            else
+                std::cout << "error: cannot delete successor because it was unassigned\n";
+        } else {
+            // target does not have r.child
+            if (target->_left) {
+                // but has a l.child
+                successor = target->_left;
+                // or target->data = successor->data, target->count = successor->count, but it seems okay
+                target = successor;
+                delete successor;
+            } else {
+                // target is a leaf node: has no l.child or r.child
+                delete target;
+            }
+        }
+        
+    } else {
+        target->_count -= count;
+    }
+//    std::cout << "remove " << target->_data << std::endl;
 }
 
 template<typename T>

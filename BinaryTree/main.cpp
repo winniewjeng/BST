@@ -5,8 +5,22 @@
 
 using namespace std;
 
+void testInsert(bst<int>& b);
+void testSearch(bst<int>& b);
+
 int main(int argc, char const* argv[]) {
     bst<int> b;
+    
+    testInsert(b);
+    b.remove(4);
+//    testSearch(b);
+    b.print();
+    b.remove(10);
+    
+    return 0;
+}
+
+void testInsert(bst<int>& b) {
     b.insert(7, 1);
     b.insert(8, 1);
     b.insert(9, 10);
@@ -18,29 +32,33 @@ int main(int argc, char const* argv[]) {
     b.insert(5, 1);
     b.insert(6, 1);
     
-
     b.print();
+}
+
+void testSearch(bst<int>& b) {
     
-    
-//    b.remove(1,1);
-    node<int>* f = b.search(5);
-    if(!f)
+    node<int>* n1 = b.search(5);
+    if(!n1)
         cout << "wth\n";
     else {
-        cout << f->getData() << endl;
+        cout << n1->getData() << endl;
     }
-
-
-//    node<int>* b1;
-//    b1 = b.search(4);
-//    b1->getData();
+    node<int>* n2 = b.search(5);
+    if(!n2)
+        cout << "wthh\n";
+    else {
+        cout << n2->getData() << endl;
+    }
+    if (n1==n2) {
+        cout << "yeh\n";
+    }
     
-//    node<int>* b1(iptr);
-//    node<int>* b2;
+    node<int>* b1;
+    b1 = b.search(4);
+    b1->getData();
     
     
-    return 0;
-}
+};
 //
 //void perform(binaryTree<char> tree[], char selection, int &touse)
 //{
@@ -166,3 +184,4 @@ int main(int argc, char const* argv[]) {
 //     perform(tree, selection, toUse);
 //  }while(toupper(selection) != 'Q');
 //};
+//
