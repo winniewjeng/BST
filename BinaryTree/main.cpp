@@ -5,12 +5,8 @@
 
 using namespace std;
 
-int main()
-{
+int main(int argc, char const* argv[]) {
     bst<int> b;
-
-
-   
     b.insert(7, 1);
     b.insert(8, 1);
     b.insert(9, 10);
@@ -27,7 +23,16 @@ int main()
     
     
 //    b.remove(1,1);
-    b.search(15);
+    b.search(14);
+    
+
+
+//    node<int>* b1;
+//    b1 = b.search(4);
+//    b1->getData();
+    
+//    node<int>* b1(iptr);
+//    node<int>* b2;
     
     
     return 0;

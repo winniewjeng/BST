@@ -13,10 +13,10 @@ struct node {
     T _data;
     node<T>* _left;
     node<T>* _right;
-    int _depth;
     int _count;
     
     // essentials
+    node(T data);
     node(T data = T(), int count = 0);
     node(T data = T(), node* left = nullptr, node* right = nullptr, int count = 0);
     ~node();
@@ -30,7 +30,6 @@ struct node {
     
     // setters
     void set(const T& data, int count);
-    void update_depth();
 //    node<T>& operator-=(int count) { this->_count -= count; return *this; } // broke
 //    node<T>& operator+=(int count) { this->_count += count; return *this; }  // broke
     
@@ -62,6 +61,14 @@ private:
 
 // essentials
 template <typename T>
+node<T>::node(T data) {
+    std::cout << "node ctor\n";
+    _data = data;
+    _count = 0;
+    _left = _right = nullptr;
+}
+
+template <typename T>
 node<T>::node(T data, int count) {
     _data = data;
     _count = count;
@@ -71,7 +78,6 @@ node<T>::node(T data, int count) {
 template <typename T>
 node<T>::node(T data, node* left, node* right, int count)
 : _data(data), _left(left), _right(right), _count(count) {
-    update_depth();
 }
 
 template<typename T>
@@ -122,11 +128,6 @@ void node<T>::set(const T& data, int count) {
     _data = data;
     _count = count;
 }
-
-//template<typename T>
-//void update_depth() {
-//
-//}
 
 // ios
 template<typename S>

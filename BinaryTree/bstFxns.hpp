@@ -138,13 +138,13 @@ void bstfxns<T>::balance(node<T>*& root) {
 
 template<typename T>
 void bstfxns<T>::remove(node<T>*& root, const T& data, int count) {
-
+    
 }
 
 template<typename T>
 node<T>* bstfxns<T>::search(node<T>*& root, const T& data) {
 
-    if (!root) {
+    if (!root)
         std::cout <<"the tree is empty!\n";
         
     if (root->_data == data) {
@@ -158,6 +158,7 @@ node<T>* bstfxns<T>::search(node<T>*& root, const T& data) {
         return search(root->_right, data);
     } else
         std::cout << data << " is not in the tree\n";
+    
     return nullptr;
 }
 
