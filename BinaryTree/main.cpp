@@ -23,8 +23,12 @@ int main(int argc, char const* argv[]) {
     
     
 //    b.remove(1,1);
-    b.search(14);
-    
+    node<int>* f = b.search(5);
+    if(!f)
+        cout << "wth\n";
+    else {
+        cout << f->getData() << endl;
+    }
 
 
 //    node<int>* b1;

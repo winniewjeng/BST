@@ -31,8 +31,8 @@ public:
         std::cout << "root " << root->_data << std::endl;
     }
     
-    void search(const T& data) {
-        bstfxns<T>::search(root, data);
+    node<T>* search(const T& data) {
+        return bstfxns<T>::search(root, data);
     }
     
     void print() {
