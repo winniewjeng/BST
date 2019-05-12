@@ -8,17 +8,28 @@ using namespace std;
 int main()
 {
     bst<int> b;
-    b.insert(6, 1);
+
+
+   
     b.insert(7, 1);
+    b.insert(8, 1);
+    b.insert(9, 10);
+    b.insert(10, 1);
+    b.insert(1, 1);
+    b.insert(2, 1);
+    b.insert(3, 1);
     b.insert(4, 1);
     b.insert(5, 1);
-    b.insert(2, 1);
-    b.insert(4, 1);
-    b.insert(1, 1);
-    b.insert(7, 1);
-    b.insert(9, 1);
+    b.insert(6, 1);
     
+
     b.print();
+    
+    
+//    b.remove(1,1);
+    b.search(15);
+    
+    
     return 0;
 }
 //

@@ -34,10 +34,10 @@ public:
     
     void insert(node<T>*& root, const T& data, int count = 1);
     void remove(node<T>*& root, const T& data, int count = 1);
+    node<T>* search(node<T>*& root, const T& data);
     
     void print(node<T>* root);
-    
-    
+
 };
 
 // count the number of real nodes in the tree
@@ -45,7 +45,6 @@ template <typename T>
 int bstfxns<T>::nodeCount(node<T>* root) {
     if (!root)
         return 0;
-    
     int count = 1;
     if (root->_left)
         count = count + totalDataCount(root->_left);
@@ -58,10 +57,8 @@ int bstfxns<T>::nodeCount(node<T>* root) {
 // count the number of total data inside the tree
 template <typename T>
 int bstfxns<T>::totalDataCount(node<T>* root) {
-    
     if (!root)
         return 0;
-    
     int count = root->getCount();
     if (root->_left)
         count = count + totalDataCount(root->_left);
@@ -73,7 +70,6 @@ int bstfxns<T>::totalDataCount(node<T>* root) {
 // add a data
 template<typename T>
 void bstfxns<T>::insert(node<T>*& root, const T& data, int count) {
-    
     if (!root) {
         root = new node<T>(data, count);
     } else if (*root == data) {
@@ -94,7 +90,6 @@ int bstfxns<T>::height(node<T>* root) {
 
 template<typename T>
 int bstfxns<T>::balanceFactor(node<T>* root) {
-    
     if(!root)
         return 0;
     return ( height(root->_left) - height(root->_right) );
@@ -143,7 +138,27 @@ void bstfxns<T>::balance(node<T>*& root) {
 
 template<typename T>
 void bstfxns<T>::remove(node<T>*& root, const T& data, int count) {
-    
+
+}
+
+template<typename T>
+node<T>* bstfxns<T>::search(node<T>*& root, const T& data) {
+
+    if (!root) {
+        std::cout <<"the tree is empty!\n";
+        
+    if (root->_data == data) {
+        std::cout << "fonud target data " << root->_data << std::endl;
+        return root;
+    } else if (root->_data > data && root->_left) {
+        std::cout << "look left of " << root->_data << std::endl;
+        return search(root->_left, data);
+    } else if (root->_data < data && root->_right) {
+        std::cout << "look right of " << root->_data << std::endl;
+        return search(root->_right, data);
+    } else
+        std::cout << data << " is not in the tree\n";
+    return nullptr;
 }
 
 template<typename T>
@@ -155,7 +170,6 @@ void bstfxns<T>::print(node<T>* root) {
         std::cout << " | " << root->_data << " | " << std::endl;
         if (root->_right)
             print(root->_right);
-        
     }
 }
 

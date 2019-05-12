@@ -23,11 +23,16 @@ public:
         bstfxns<T>::insert(root, data, count);
         bstfxns<T>::balance(root);
 //         std::cout << bstfxns<T>::totalDataCount(root) << std::endl;
-        std::cout << "counts " << bstfxns<T>::nodeCount(root) << std::endl;
+//        std::cout << "counts " << bstfxns<T>::nodeCount(root) << std::endl;
     }
     
     void remove(const T& data, int count = 1) {
         bstfxns<T>::remove(root, data, count);
+        std::cout << "root " << root->_data << std::endl;
+    }
+    
+    void search(const T& data) {
+        bstfxns<T>::search(root, data);
     }
     
     void print() {

@@ -48,6 +48,9 @@ struct node {
     bool operator>=(const T& x) { return _data >= x; }
     bool operator==(const T& x) { return _data == x; }
     
+    bool operator==(const node<T>*& n) { return _data == n->_data; }
+    
+    
     T& operator*() { return ptr->data; }
     T* operator->() { return &ptr->data; }
     
@@ -120,10 +123,10 @@ void node<T>::set(const T& data, int count) {
     _count = count;
 }
 
-template<typename T>
-void update_depth() {
-    
-}
+//template<typename T>
+//void update_depth() {
+//
+//}
 
 // ios
 template<typename S>
