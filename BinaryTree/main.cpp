@@ -14,11 +14,9 @@ int main(int argc, char const* argv[]) {
     testInsert(b);
 //    b.remove(4);
 //    b.remove(3);
-    for (int i = 0; i < 12; ++i) {
-        b.remove(i);
-    }
+
 //    testSearch(b);
-    b.print();
+//    b.print();
 //    b.remove(10);
     
     return 0;
@@ -26,16 +24,29 @@ int main(int argc, char const* argv[]) {
 
 void testInsert(bst<int>& b) {
     
-    b.insert(1, 1);
-    b.insert(2, 1);
-    b.insert(3, 1);
-    b.insert(4, 1);
-    b.insert(5, 1);
-    b.insert(6, 1);
-    b.insert(7, 1);
-    b.insert(8, 1);
-    b.insert(9, 10);
-    b.insert(10, 1);
+//    for (int i = 10; i > 0; --i)
+//        b.insert(i, i);
+//    b.insert(1, 1);
+//    b.insert(4, 1);
+//    b.insert(3, 1);
+    b.insert(41,1);
+    b.insert(20,1);
+    b.insert(65,1);
+    b.insert(11,1);
+    b.insert(32,1);
+    b.insert(50,1);
+    b.insert(91,1);
+    b.insert(29,1);
+    b.insert(33,1);
+    b.insert(72,1);
+    b.insert(99,1);
+    b.insert(30,1);
+//    b.insert(5, 1);
+//    b.insert(6, 1);
+//    b.insert(7, 1);
+//    b.insert(8, 1);
+//    b.insert(9, 10);
+//    b.insert(10, 1);
     
     b.print();
 }

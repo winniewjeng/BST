@@ -23,6 +23,7 @@ public:
 
         bstfxns<T>::insert(root, data, count);
         bstfxns<T>::balance(root);
+//        std::cout << root->_data << std::endl;
 //         std::cout << bstfxns<T>::totalDataCount(root) << std::endl;
 //        std::cout << "counts " << bstfxns<T>::nodeCount(root) << std::endl;
     }

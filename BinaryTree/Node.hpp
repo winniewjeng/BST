@@ -54,7 +54,7 @@ struct node {
     T* operator->() { return &ptr->data; }
     
 private:
-    void copy(const node<T>& other);
+    node<T>*& copy(const node<T>& other);
     node<T>* ptr;
     
 };
@@ -89,27 +89,28 @@ node<T>::~node()
 template<typename T>
 node<T>::node(const node<T>& other)
 {
-    copy(other);
+    this = copy(other);
 }
 
 template<typename T>
 node<T>& node<T>::operator=(const node<T>& other)
 {
-    if(this != &other)
-        copy(other);
+    if(this != &other) {
+        this = copy(other);
+    }
     return *this;
 }
 
 template<typename T>
-void node<T>::copy(const node<T>& other)
+node<T>*& node<T>::copy(const node<T>& other)
 {
-    set(other->_data, other->_count);
-    if (_left)
-        delete _left;
-    if (_right)
-        delete _right;
-    _left = other->_left;
-    _right = other->_right;
+    return new node<T>(other->_data, other->_count);
+//    if (_left)
+//        delete _left;
+//    if (_right)
+//        delete _right;
+//    _left = other->_left;
+//    _right = other->_right;
 }
 
 // getters
