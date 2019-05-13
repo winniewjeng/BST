@@ -103,7 +103,13 @@ node<T>& node<T>::operator=(const node<T>& other)
 template<typename T>
 void node<T>::copy(const node<T>& other)
 {
-    set(other.data, other.count);
+    set(other->_data, other->_count);
+    if (_left)
+        delete _left;
+    if (_right)
+        delete _right;
+    _left = other->_left;
+    _right = other->_right;
 }
 
 // getters

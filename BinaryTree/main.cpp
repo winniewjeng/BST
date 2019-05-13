@@ -12,25 +12,30 @@ int main(int argc, char const* argv[]) {
     bst<int> b;
     
     testInsert(b);
-    b.remove(4);
+//    b.remove(4);
+//    b.remove(3);
+    for (int i = 0; i < 12; ++i) {
+        b.remove(i);
+    }
 //    testSearch(b);
     b.print();
-    b.remove(10);
+//    b.remove(10);
     
     return 0;
 }
 
 void testInsert(bst<int>& b) {
-    b.insert(7, 1);
-    b.insert(8, 1);
-    b.insert(9, 10);
-    b.insert(10, 1);
+    
     b.insert(1, 1);
     b.insert(2, 1);
     b.insert(3, 1);
     b.insert(4, 1);
     b.insert(5, 1);
     b.insert(6, 1);
+    b.insert(7, 1);
+    b.insert(8, 1);
+    b.insert(9, 10);
+    b.insert(10, 1);
     
     b.print();
 }

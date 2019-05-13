@@ -20,6 +20,7 @@ public:
     bst<T>& operator=(const bst<T>& other);
     
     void insert(const T& data, int count = 1) {
+
         bstfxns<T>::insert(root, data, count);
         bstfxns<T>::balance(root);
 //         std::cout << bstfxns<T>::totalDataCount(root) << std::endl;
@@ -28,7 +29,10 @@ public:
     
     void remove(const T& data, int count = 1) {
         node<T>* target = search(data);
+//        std::cout << "target data " << target->_data << std::endl;
+//        std::cout << "data " << data  << std::endl;
         bstfxns<T>::remove(root, target, count);
+        bstfxns<T>::balance(root);
 //        std::cout << "root " << root->_data << std::endl;
     }
     
