@@ -163,20 +163,30 @@ void bstfxns<T>::remove(node<T>*& root, node<T>*& target, int count) {
             target = nullptr;
         }
         else if (target->_right) {
-
-            if (target->_right->_left) {
-//                node<T>* walker = target->_right;
-//                while (walker->_left->_left)
-//                    walker = walker->_left;
-//                successor = walker->_left;
-//                walker->_left = successor->_right;
-//                successor->_left = target->_left;
-//                successor->_right = target->_right;
-//
-//                std::swap(target, successor);
-//                cout << target->_data <<endl;
+            node<T>* successor = target->_right; // set successor
+            if (successor->_left) {
+                node<T>* walker = target->_right; // set walker
+                while (walker->_left->_left)
+                    walker = walker->_left;
+                successor = walker->_left; // update successor
+                walker->_left = successor->_right;
+            } else {
+                target->_right = successor->_right;
             }
+            successor->_right = nullptr;
+            target->_data = successor->_data;
+            target->_count = successor->_count;
+            delete successor;
+            successor = nullptr;
+        } else {
+            node<T>* successor = target->_left; // set successor
+            target->_left = nullptr;
+            target->_data = successor->_data;
+            target->_count = successor->_count;
+            delete successor;
+            successor = nullptr;
         }
+        
         //        if (target->_right) {
         //            node<T>* successor;
         //            if (target->_right->_left) {

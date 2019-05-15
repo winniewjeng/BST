@@ -20,6 +20,8 @@ int main(int argc, char const* argv[]) {
     cout << endl;
     b.remove(33);
     b.remove(30);
+    b.remove(41);
+    b.remove(65);
     cout << endl;
     b.print();
     cout << endl;
