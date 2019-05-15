@@ -16,8 +16,9 @@
 #include <cmath>
 #include <string>
 #include "node.hpp"
+#include <algorithm>
 
-
+using namespace std;
 template <typename T>
 class bstfxns {
 public:
@@ -84,21 +85,23 @@ void bstfxns<T>::insert(node<T>*& root, const T& data, int count) {
 
 template<typename T>
 int bstfxns<T>::height(node<T>* root) {
-    if (!root)
+    if (!root || root->_count == 0)
         return 0;
     return ( 1 + std::max( height(root->_left), height(root->_right) ) );
 }
 
 template<typename T>
 int bstfxns<T>::balanceFactor(node<T>* root) {
-    if(!root)
+    if(!root || root->_count == 0)
         return 0;
     return (height(root->_left) - height(root->_right));
 }
 
 template<typename T>
 void bstfxns<T>::balance(node<T>*& root) {
-    
+//    std::cout << "balance root "<< root->_data << std::endl;
+    if (!root || root->_count == 0)
+        return ;
     // left heavy
     if (root->_left)
         balance(root->_left);
@@ -107,7 +110,7 @@ void bstfxns<T>::balance(node<T>*& root) {
     
     //    std::cout << "balance factor for " <<  root->_data << " is " << balanceFactor(root) << std::endl;
     if ( balanceFactor(root) > 1 && balanceFactor(root->_left) < 0) {
-        std::cout << "left heavy & zigged" << std::endl;
+        //        std::cout << "left heavy & zigged" << std::endl;
         node<T>* hold = root->_left;
         root->_left = hold->_right;
         hold->_right = root->_left->_left;
@@ -115,7 +118,7 @@ void bstfxns<T>::balance(node<T>*& root) {
         
     }
     if ( balanceFactor(root) > 1 && balanceFactor(root->_left) > 0 ) {
-        std::cout << "left heavy" << std::endl;
+        //        std::cout << "left heavy" << std::endl;
         node<T>* temp = new node<T>(root->_data, root->_count);
         node<T>* hold = root->_left;
         temp->_left = hold->_right;
@@ -128,110 +131,122 @@ void bstfxns<T>::balance(node<T>*& root) {
         
     }
     if (balanceFactor(root) < -1 && balanceFactor(root->_right) > 0) {
-        std::cout << "right heavy & zigged" << std::endl;
+        //        std::cout << "right heavy & zigged" << std::endl;
         node<T>* hold = root->_right;
         root->_right = hold->_left;
         hold->_left = root->_right->_right;
         root->_right->_right = hold;
     }
     if (balanceFactor(root) < -1 && balanceFactor(root->_right) < 0 ) {
-        std::cout << "right heavy" << std::endl;
+        //        std::cout << "right heavy" << std::endl;
         node<T>* temp = new node<T>(root->_data, root->_count);
         node<T>* hold = root->_right;
         temp->_right = hold->_left;
         temp->_left = root->_left;
-        // hold->_left = nullptr;
         root->_left = root->_right = nullptr;
         delete root;
         hold->_left = temp;
         root = hold;
-        
     }
 }
 
 template<typename T>
 void bstfxns<T>::remove(node<T>*& root, node<T>*& target, int count) {
-    
+//    std::cout << "target data in remove " << target << std::endl;
     if (!target)
         std::cout << "cannot remove nonexistent data" << std::endl;
     else if (target->_count - count > 0)
         target->_count -= count;
     else {
-        //        std::cout << "delete target node w/data " << target->_data  << std::endl;
         if (!target->_left && !target->_right) {
-            //            std::cout << "i " << target->_data << " am a leaf node\n";
+            delete target;
+            target = nullptr;
         }
-        //        // delete target
+        else if (target->_right) {
+
+            if (target->_right->_left) {
+//                node<T>* walker = target->_right;
+//                while (walker->_left->_left)
+//                    walker = walker->_left;
+//                successor = walker->_left;
+//                walker->_left = successor->_right;
+//                successor->_left = target->_left;
+//                successor->_right = target->_right;
+//
+//                std::swap(target, successor);
+//                cout << target->_data <<endl;
+            }
+        }
         //        if (target->_right) {
-        //            node<T>* successor = target->_right;
-        //            if (successor->_left) {
-        //                node<T>* walker = successor; // set a default successor
+        //            node<T>* successor;
+        //            if (target->_right->_left) {
+        //                node<T>* walker = target->_right;
         //                while (walker->_left->_left)
         //                    walker = walker->_left;
-        //                successor = walker->_left; // update the successor
-        //                // prime(prepare) the successor
-        //                walker->_left = successor->_right; // whether it be a node or nullptr
-        //                successor->_left = target->_left;
-        //                successor->_right = target->_right;
+        //                successor = new node<T>(walker->_left->_data, walker->_left->_count);
+        //                walker->_left = successor->_right;
         //            } else {
-        //                // prime(prepare) the successor
-        //                successor->_left = target->_left;
+        //                successor = new node<T>(target->_right->_data, target->_left->_count);
         //            }
-        //            // replace target with successor
-        //            target = successor;
-        //        } else {
-        //            // target does not have a right child
-        //            if (target->_left)
-        //                target = target->_left;
-        //            else {
-        //                std::cout << "i should be here\n";
-        //                delete target; // target is a leaf node
+        //            cout << "target is " << target->_data << "\n";
+        //            cout << "successor is " << successor->_data << endl;
+        //            cout << "target left is " << target->_left->_data << endl;
+        //             cout << "target left is " << target->_right->_data << endl;
+        //            successor->_right = target->_right;
+        //            successor->_left = target->_left;
+        //            cout << "successor left is " << successor->_left->_data << endl;
+        //             cout << "target left left is " << target->_left->_left->_data << endl;
+        //             cout << "successor left left is " << successor->_left->_left->_data << endl;
+        ////            if (root == target)
+        ////                root = successor;
         //
-        //            }
-        //        }
-        //        node<T>* successor = nullptr;
-        //        node<T>* walker = nullptr;
-        //        // does target have a right child?
-        //        if(target->_right) {
-        //            walker = target->_right;
-        //            // does target's r.child have l.(grand)child?
-        //            if(walker->_left) {
-        //                while (walker->_left->_left)
-        //                    walker = walker->_left;
-        //
-        //                successor = walker->_left;
-        //
-        //                // does successor have a r.child?
-        //                if (successor->_right) {
-        //                    node<T>* temp = successor->_right;
-        //                    delete successor->_right;
-        //                    walker->_left = temp;
-        //                }
-        //            } else {
-        //                //target's r.child does not have any l.child
-        //                successor = target->_right;
-        //            }
-        //            target = successor;
-        //            // unlikely but exception handling is important
-        //            if (successor)
-        //                delete successor;
-        //            else
-        //                std::cout << "error: cannot delete successor because it was unassigned\n";
-        //        } else {
-        //            // target does not have r.child
-        //            if (target->_left) {
-        //                // but has a l.child
-        //                successor = target->_left;
-        //                // or target->data = successor->data, target->count = successor->count, but it seems okay
-        //                target = successor;
-        //                delete successor;
-        //            } else {
-        //                // target is a leaf node: has no l.child or r.child
-        //                delete target;
-        //            }
-        //        }
+        //            target->_left = target->_right = nullptr;
+        //            delete target;
+        
+        //            std::swap(target, successor);
+        //            cout << "successor is " << successor->_data << endl;
+        //            cout << "successor left left is " << successor->_left->_left->_data << endl;
+        //            cout << "successor right rifght is " << successor->_right->_right->_data << endl;
     }
     
+    //
+    //        // delete target and find successor
+    //        if (target->_right) {
+    //
+    //            // if target has a right child node
+    //            node<T>* successor = new node<T>(target->_right->_data, target->_left->_count);
+    //            if (target->_right->_left) {
+    //                // if target's right node has left grand(child) node
+    //                node<T>* walker = target->_right;
+    //                while (walker->_left->_left)
+    //                    walker = walker->_left;
+    //                successor = walker->_left; // update successor
+    //                walker->_left = successor->_right; // update tree struct
+    //            }
+    //            successor->_right = target->_right;
+    //            successor->_left = target->_left;
+    //            if (root == target)
+    //                root = successor;
+    //            target->_left = target->_right = nullptr;
+    //            delete target;
+    //            target = successor;
+    //        } else {
+    //            if (target->_left) {
+    //                // if target has not right child but has a left child node
+    //                node<T>* successor = new node<T>(target->_left->_data, target->_left->_count);
+    //                if (root == target)
+    //                    root = successor;
+    //                target->_left = nullptr;
+    //                delete target;
+    //                target = successor;
+    //            } else {
+    //                // no successor
+    //                delete target;
+    //                target = nullptr;
+    //            }
+    //        }
+    ////         std::cout << "target " << target->_data << std::endl;
+
 }
 
 template<typename T>
@@ -250,15 +265,15 @@ node<T>* bstfxns<T>::search(node<T>*& root, const T& data) {
         //        std::cout << "look right of " << root->_data << std::endl;
         return search(root->_right, data);
     }
-    //    else
-    //        std::cout << data << " is not in the tree\n";
     
-    return nullptr;
+    return root;
 }
 
 template<typename T>
 void bstfxns<T>::print(node<T>* root) {
     // in-order traversal for printing
+    if (!root || root->_count == 0)
+        return ;
     if (root) {
         if (root->_left)
             print(root->_left);

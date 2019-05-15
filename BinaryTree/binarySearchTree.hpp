@@ -29,15 +29,20 @@ public:
     }
     
     void remove(const T& data, int count = 1) {
-        node<T>* target = search(data);
+        node<T>* target = nullptr; // reset target
+        target = search(data);
+//        std::cout << "target data in remove " << target << std::endl;
 //        std::cout << "target data " << target->_data << std::endl;
 //        std::cout << "data " << data  << std::endl;
         bstfxns<T>::remove(root, target, count);
+//        std::cout << "target data in remove " << target << " target " << target->_data << std::endl;
         bstfxns<T>::balance(root);
-//        std::cout << "root " << root->_data << std::endl;
+        
+        std::cout << "root " << root->_data << std::endl;
     }
     
     node<T>* search(const T& data) {
+//        std::cout << "target data in search " << bstfxns<T>::search(root, data) << std::endl;
         return bstfxns<T>::search(root, data);
     }
     

@@ -17,8 +17,16 @@ int main(int argc, char const* argv[]) {
 
 //    testSearch(b);
 //    b.print();
-//    b.remove(10);
+    cout << endl;
+    b.remove(33);
+    b.remove(30);
+    cout << endl;
+    b.print();
+    cout << endl;
     
+////    b.remove(65);
+//    cout << endl;
+//    b.print();
     return 0;
 }
 
@@ -26,28 +34,10 @@ void testInsert(bst<int>& b) {
     
 //    for (int i = 10; i > 0; --i)
 //        b.insert(i, i);
-//    b.insert(1, 1);
-//    b.insert(4, 1);
-//    b.insert(3, 1);
-    b.insert(41,1);
-    b.insert(20,1);
-    b.insert(65,1);
-    b.insert(11,1);
-    b.insert(32,1);
-    b.insert(50,1);
-    b.insert(91,1);
-    b.insert(29,1);
-    b.insert(33,1);
-    b.insert(72,1);
-    b.insert(99,1);
-    b.insert(30,1);
-//    b.insert(5, 1);
-//    b.insert(6, 1);
-//    b.insert(7, 1);
-//    b.insert(8, 1);
-//    b.insert(9, 10);
-//    b.insert(10, 1);
-    
+
+    int rightZig[] = {41,20,65,11,32,50,91,29,33,72,99,30, 45, 55};
+    for (int i = 0; i < 14; ++i)
+        b.insert(rightZig[i],1);
     b.print();
 }
 
