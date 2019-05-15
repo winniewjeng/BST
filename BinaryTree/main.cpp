@@ -7,28 +7,17 @@ using namespace std;
 
 void testInsert(bst<int>& b);
 void testSearch(bst<int>& b);
+void testRemove(bst<int>& b);
 
 int main(int argc, char const* argv[]) {
     bst<int> b;
     
     testInsert(b);
-//    b.remove(4);
-//    b.remove(3);
-
-//    testSearch(b);
-//    b.print();
-    cout << endl;
-    b.remove(33);
-    b.remove(30);
-    b.remove(41);
-    b.remove(65);
-    cout << endl;
+    testRemove(b);
+//    testInsert(b);
+    b.insert(3,1);
     b.print();
-    cout << endl;
-    
-////    b.remove(65);
-//    cout << endl;
-//    b.print();
+
     return 0;
 }
 
@@ -67,6 +56,16 @@ void testSearch(bst<int>& b) {
     
     
 };
+
+void testRemove(bst<int>& b) {
+    b.remove(33);
+    b.remove(30);
+    b.remove(41);
+    b.remove(65);
+    b.print();
+    
+}
+
 //
 //void perform(binaryTree<char> tree[], char selection, int &touse)
 //{

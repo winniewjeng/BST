@@ -83,7 +83,10 @@ node<T>::node(T data, node* left, node* right, int count)
 template<typename T>
 node<T>::~node()
 {
-    set(T(), 0);
+    std::cout << "deleting " << _data << std::endl;
+    _data = T();
+    _count = 0;
+//    set(T(), 0);
 }
 
 template<typename T>
